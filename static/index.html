@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OSTL — One-Shot Concept Learner</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="brand">
+    <div class="logo">◆</div>
+    <div class="brand-text">
+      <h1>OSTL</h1>
+      <span>One-Shot Concept Learner</span>
+    </div>
+  </div>
+
+  <div class="stats" id="stats">
+    <div class="stat"><span class="stat-value" id="stat-total">0</span><span class="stat-label">concepts</span></div>
+    <div class="stat"><span class="stat-value" id="stat-abstract">0</span><span class="stat-label">invented</span></div>
+    <div class="stat"><span class="stat-value" id="stat-depth">0</span><span class="stat-label">max depth</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="icon-btn" id="btn-help" title="Help (?)">?</button>
+    <button class="icon-btn" id="btn-export" title="Export concepts">↓</button>
+    <button class="icon-btn" id="btn-import" title="Import concepts">↑</button>
+    <button class="icon-btn" id="btn-theme" title="Toggle theme">◐</button>
+  </div>
+</header>
+
+<main class="main">
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <h2>Concepts</h2>
+      <span class="badge" id="concept-count">0</span>
+    </div>
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search concepts…" autocomplete="off">
+    </div>
+    <div class="concept-list" id="concept-list">
+      <div class="empty-state">
+        <p>No concepts yet.</p>
+        <p class="muted">Use <code>teach "hello" → "OLLEH"</code> in the chat.</p>
+      </div>
+    </div>
+    <div class="details" id="details" hidden></div>
+  </aside>
+
+  <section class="chat">
+    <div class="chat-head">
+      <h2>Chat</h2>
+      <div class="chat-hint">Enter to send · Shift+Enter for newline</div>
+    </div>
+    <div class="chat-messages" id="messages">
+      <div class="welcome">
+        <div class="welcome-icon">◆</div>
+        <h3>Welcome to OSTL</h3>
+        <p>Teach me a rule from a single example — I'll infer the general program, remember it, and reuse it.</p>
+        <div class="welcome-examples">
+          <button class="chip" data-cmd='teach "hello" -> "OLLEH"'>teach "hello" → "OLLEH"</button>
+          <button class="chip" data-cmd='teach 3 -> 9'>teach 3 → 9</button>
+          <button class="chip" data-cmd='invent'>invent</button>
+          <button class="chip" data-cmd='help'>help</button>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <div class="suggestions" id="suggestions" hidden></div>
+      <div class="input-wrap">
+        <textarea id="input" rows="1" placeholder='teach "hello" -> "OLLEH"   ·   /help'></textarea>
+        <button class="send-btn" id="send" title="Send (Enter)">↵</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="graph-panel">
+    <div class="graph-head">
+      <h2>Graph</h2>
+      <div class="graph-controls">
+        <button class="icon-btn" id="zoom-out" title="Zoom out">−</button>
+        <button class="icon-btn" id="zoom-fit" title="Fit to screen">⤢</button>
+        <button class="icon-btn" id="zoom-in" title="Zoom in">+</button>
+      </div>
+    </div>
+    <div class="graph" id="graph">
+      <svg id="svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--edge)"/>
+          </marker>
+        </defs>
+        <g id="viewport"></g>
+      </svg>
+      <div class="graph-empty" id="graph-empty">
+        <p>The concept graph will appear here.</p>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="dot learned"></i>learned</span>
+      <span><i class="dot abstract"></i>invented</span>
+    </div>
+  </aside>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card">
+    <button class="icon-btn modal-close" id="modal-close">×</button>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
