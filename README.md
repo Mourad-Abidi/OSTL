@@ -46,7 +46,7 @@ It is a **minimal, legible implementation of Bayesian Program Induction**. It is
 ## Quick start
 
 ```bash
-git clone https://github.com/<you>/OSTL.git
+git clone https://github.com/Mourad-Abidi/OSTL.git
 cd OSTL
 
 # 1) Pure-symbolic mode — no dependencies beyond Python
